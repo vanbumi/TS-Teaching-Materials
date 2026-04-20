@@ -25,7 +25,7 @@ const createUser = (name: string, age: number) => ({
     age,
     createdAt:new Date()
 })
-console.log(createUser("Samuel", 25));
+console.log(createUser("Samuel", 25)); // Output: {name: "Samuel", age: 25}
 
 
 
@@ -66,6 +66,7 @@ const sumAll = (...numbers: number[]): number => {
     return numbers.reduce((total, num) => total + num, 0);
 };
 console.log(sumAll) // Output: 15
+console.log(`Sum of all numbers: ${sumAll(1, 2, 3, 4, 5)}`); // Output: 15
 
 
 
@@ -103,7 +104,6 @@ const totalAgeActive = users.reduce((total, user) => {
         return total + user.age;
     } else {
         return total;
-        console.log(total);
     }
 }, 0);
 console.log(`Jumlah umur user active: ${totalAgeActive}`);
@@ -142,7 +142,7 @@ getUserData(); // Output: User data: {name: "Dyo", age: 25}
 
 
 
-// Bagian 7: Modules (Exprot/Import)
+// Bagian 7: Modules (Export/Import)
 
 export const PI = 3.1419;
 
