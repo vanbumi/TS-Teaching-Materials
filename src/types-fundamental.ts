@@ -1,6 +1,6 @@
 export {};
 
-// Hari 2 - Types Fundamental (Primitive Types, Inference, Unio, dll)
+// Hari 2 - Types Fundamental (Primitive Types, Inference, Union, dll)
 
 // Bagian 1: Primitive Types & Inference
 // Apa itu Primitive Types? Primitive Types adalah tipe data dasar yang digunakan untuk menyimpan nilai primitif seperti string, number, boolean, dll.
@@ -38,7 +38,7 @@ console.log(role);
 // Apa itu Object Types? Object Types adalah tipe data yang digunakan untuk menyimpan nilai object seperti {name: string, age: number, address: string, dll.}
 
 // Buat tipe User dengan properti: id, name, age, email, isActive, role
-type user = {
+type User = {
     id: number,
     name: string,
     age: number,
@@ -47,7 +47,7 @@ type user = {
     role: Role
 };
 
-const user: user = {
+const user: User = {
     id: 1,
     name: "Dyo",
     age: 25,
@@ -55,7 +55,6 @@ const user: user = {
     isActive: true,
     role: "admin"
 };
-
 console.log(user);
 
 
