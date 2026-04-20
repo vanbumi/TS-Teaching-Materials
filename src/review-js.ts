@@ -1,113 +1,73 @@
+// =============================================
+// Review JavaScript Modern - Dyo
+// =============================================
+
 // Bagian 1: Variables & Template Literals
 
-// 1. Buat contoh penggunaan let, const, dan template literal:
-const nama = "Dyo";
-let umur = 55;
-let isMarried = true;
-const gender = "Laki-laki";
-let alamat = "Cimahi, Jawa Barat";
+const nama: string = "Dyo";
+let umur: number = 35;
+let alamat: string = "Cimahi, Jawa Barat";
 
-// Buat template literal:
+console.log(`Halo, nama saya ${nama}, umur ${umur} tahun, dari ${alamat};`)
 
-const biodata = `Nama saya ${nama}, umur saya ${umur}, saya adalah seorang ${gender}, saya adalah ${isMarried ? "menikah" : "belum menikah"}, dan saya tinggal di ${alamat}.`;
-
-console.log(biodata);
 
 // Bagian 2: Arrow Functions
-// Buat arrow function 1 parameter:
-
-const sayHello = (name: string) => {
-    console.log(`Hello, ${name}!`); // Output: Hello, Dyo!
-};
-
 // Buat function dengan implicit return 1 baris:
-const sapa = (nama: string) => `Hallo, ${nama}!`;
 
-// Buat function dengan multiple line dan return object:
-const person = (name: string, age: number) => {
-    return {
-        name,
-        age,
-    };  
-}
-console.log(person("Dyo", 35));
+const tambah = (a: number, b: number): number => a + b;
+console.log(tambah(1, 5));
 
-const person2 = (name: string, address: string, phone: number) => {
-    return {
-        name,
-        address,
-        phone
-    }
-}
-console.log(person2("Brandon", "Jakarta", 628123456789));
+const greet = (name: string): string => `Halo, ${name}!`;
+console.log(greet("Samuel"));
+
+const createUser = (name: string, age: number) => ({
+    name,
+    age,
+    createdAt:new Date()
+})
+console.log(createUser("Samuel", 25));
+
+
 
 // 3. Destructuring dengan alias:
 // Apa itu destructuring? Destructuring adalah cara mengambil data dari array atau object.  
 
-const user = {nama: "Budi", umur: 20, alamat: "Jakarta"};
-const {nama: namaPanggillan, umur: usia, alamat: tempatTinggal} = user;
-
-console.log(namaPanggillan);
-console.log(usia);
-console.log(tempatTinggal);
-
-// 3. Array destructuring:
-
-const warna = ['Merah', 'Kuning', 'Hijau'];
-
-// Mengambil elemen pertama dan kedua
-const [satu, dua] = warna;
-
-console.log(satu);
-console.log(dua);
-
-// Nested Object destructuring:
-
-const karyawan = {
+const user = {
     id: 1,
-    info: {
-        kota: "Jakarta",
-        jabatan: "Manager"
+    name: "Budi", 
+    address: {
+        city: "Jakarta",
+        province: "DKI Jakarta"
     }
-}
+};
 
-// Mengambil properti kota dan jabatan yang adad di dalam info:
+const { name, address: {city}} = user; 
+console.log(name, city);
 
-const { info: {kota, jabatan}} = karyawan;
+const numbers = [10, 20, 30, 40];
+const [first, second, ...rest] = numbers;
+console.log(first, second, rest); // Output: 10, 20, [30, 40]
 
-console.log(kota);
-console.log(jabatan);
-
-// 4. Spread Operator & Rest Operator
+// Bagian 4: Spread Operator & Rest
 // Spread Operator digunakan untuk menggabungkan array atau object menjadi satu.
 // Rest Operator digunakan untuk mengambil sisa elemen dari array atau object.
 
 // a. Spread pada array:
-const arr1 = [1, 2, 3];
-const arr2 = [4, 5, 6];
-const arr3 = [...arr1, ...arr2];
-
-console.log(arr3);
+const array1 = [1, 2, 3];
+const array2 = [...array1, 4, 5, 6];
+console.log(array2); // Output: [1, 2, 3, 4, 5, 6]
 
 // b. Spread pada object:
-const obj1 = {a: 1, b: 2};
-const obj2 = {c: 3, d: 4};
-const obj3 = {...obj1, ...obj2};
+const obj1 = {name: "Dyo",  skill: "TS"};
+const obj2 = {...obj1, level: "Advanced"};
+console.log(obj2); // Output: {name: "Dyo", skill: "TS", level: "Advanced"}
 
-console.log(obj3);
+const sumAll = (...numbers: number[]): number => {
+    return numbers.reduce((total, num) => total + num, 0);
+};
+console.log(sumAll) // Output: 15
 
-// c. Rest parameter di function
-// Rest parameter digunakan untuk mengambil sisa elemen dari array atau object.
 
-// Buat garis horizontal
-console.log("=".repeat(30));
-
-const sum = (a: number, b: number, ...rest: number[]) => {
-    console.log(a);
-    console.log(b);
-    console.log(rest);
-}
-sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 // 5. Array Methods
 // Array methods digunakan untuk mengubah array menjadi array baru.
@@ -154,10 +114,42 @@ const totalActiveAge = users
     .reduce((total, user) => total + user.age, 0);
 console.log(`Jumlah umur user active: ${totalActiveAge}`);
 
+
+// Bagian 6: Async/Await
+// Async/Await digunakan untuk menangani promise.
+
+const fetchUser = (id: number): Promise<{name: string, age: number}> => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (id === 1) {
+                resolve({name: "Dyo", age: 25});
+            } else {
+                reject(new Error("User not found"));
+            }
+        }, 1000);
+    });
+};
+
+const getUserData = async () => {
+    try {
+        const user = await fetchUser(1);
+        console.log("User data:", user);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+};
+getUserData(); // Output: User data: {name: "Dyo", age: 25}
+
+
+
 // Bagian 7: Modules (Exprot/Import)
-// Karena ini satu file, buat contoh export di bagian bawah:
 
-// export const PI = 3.14;
-// export function formatName(name: string) { ... }
-// export default function main() { ... }
+export const PI = 3.1419;
 
+export function formatName(name: string): string {
+    return name.toUpperCase();
+}
+
+export default function main() {
+    console.log("Review JavaScript Modern Selesai :)");
+}
